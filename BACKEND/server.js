@@ -27,6 +27,10 @@ connection.once("open",()=>{
 const TravellerRouter = require("./routes/travellers");
 app.use("/traveller", TravellerRouter);
 
+//connecting backend and frontend for login
+const LoginRouter = require("./routes/login");
+app.use("/login",LoginRouter);
+
 app.listen(PORT, ()=>{
     console.log(`server is up and running on PORT: ${PORT}`);
 })
