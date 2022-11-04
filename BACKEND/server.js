@@ -25,13 +25,17 @@ connection.once("open",()=>{
 })
 
 
-//connecting backend and frontend for login
+//connecting backend and frontend for travellers
 const TravellerRouter = require("./routes/travellers");
 app.use("/traveller", TravellerRouter);
 
-//connecting backend and frontend for login
+//connecting backend and frontend for busServices
 const BusServiceRouter = require("./routes/busServices");
 app.use("/busService", BusServiceRouter);
+
+//connecting backend and frontend for bookings
+const BookingRouter = require("./routes/bookings");
+app.use("/booking", BookingRouter);
 
 //connecting backend and frontend for login
 const LoginRouter = require("./routes/login");
