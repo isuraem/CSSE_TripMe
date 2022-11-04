@@ -2,27 +2,59 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
-    RouteNumber: {
+    CustomerName: {
         type: String,
         required: true
     },
-    TripFrom: {
+    CustomerID: {
         type: String,
         required: true
     },
-    TripTo: {
+    Mobile: {
         type: String,
         required: true
     },
-    DateFrom: {
+    Email: {
         type: String,
         required: true
     },
-    DateTo: {
+    PickUp: {
         type: String,
         required: true
     },
-    Price: {
+    Destination: {
+        type: String,
+        required: true
+    },
+    Date: {
+        type: String,
+        required: true
+    },
+    Time: {
+        type: String,
+        required: true
+    },
+    BusService: {
+        type: String,
+        required: true
+    },
+    SourceCity: {
+        type: String,
+        required: true
+    },
+    DestinationCity: {
+        type: String,
+        required: true
+    },
+    PassengerID: {
+        type: String,
+        required: true
+    },
+    TicketNo: {
+        type: String,
+        required: true
+    },
+    Status: {
         type: String,
         required: true
     }

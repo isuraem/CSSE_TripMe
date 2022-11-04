@@ -6,15 +6,39 @@ const BusServiceSchema = new Schema({
         type: String,
         required: true
     },
+    BusServiceName: {
+        type: String,
+        required: true
+    },
     BusType: {
         type: String,
         required: true
     },
-    RouteName: {
+    RouteNumber: {
         type: String,
         required: true
     },
-    RouteNumber: {
+    DepartureTime: {
+        type: String,
+        required: true
+    },
+    JourneyTime: {
+        type: String,
+        required: true
+    },
+    RestStops: {
+        type: Number,
+        required: true
+    },
+    AirCondition: {
+        type: String,
+        required: true
+    },
+    WiFi: {
+        type: String,
+        required: true
+    },
+    ChargingPlugs: {
         type: String,
         required: true
     }

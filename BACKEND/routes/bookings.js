@@ -5,20 +5,37 @@ let Booking = require("../models/Booking");
 router.route("/addBooking").post(async(req,res)=>{
     console.log("add booking...");
 
-    const RouteNumber = req.body.RouteNumber;
-    const TripFrom = req.body.TripFrom;
-    const TripTo = req.body.TripTo;
-    const DateFrom = req.body.DateFrom;
-    const DateTo = req.body.DateTo;
-    const Price = req.body.Price;
+    const CustomerName = req.body.CustomerName;
+    const CustomerID = req.body.CustomerID;
+    const Mobile = req.body.Mobile;
+    const Email = req.body.Email;
+    const PickUp = req.body.PickUp;
+    const Destination = req.body.Destination;
+    const Date = req.body.Date;
+    const Time = req.body.Time;
+    const BusService = req.body.BusService;
+    const SourceCity = req.body.SourceCity;
+    const DestinationCity = req.body.DestinationCity;
+    const PassengerID = req.body.PassengerID;
+    const TicketNo = req.body.TicketNo;
+    const Status = req.body.Status;
+
 
     const newBooking = await new Booking({
-        RouteNumber,
-        TripFrom,
-        TripTo,
-        DateFrom,
-        DateTo,
-        Price
+        CustomerName,
+        CustomerID,
+        Mobile,
+        Email,
+        PickUp,
+        Destination,
+        Date,
+        Time,
+        BusService,
+        SourceCity,
+        DestinationCity,
+        PassengerID,
+        TicketNo,
+        Status
     })
 
     newBooking.save().then(()=>{
@@ -43,14 +60,24 @@ router.route("/updatebooking/:id").put(async(req,res)=>{
     let bookingID = req.params.id;
     console.log("update booking",req);
 
-    const {RouteNumber,TripFrom,TripTo,DateFrom,DateTo,Price} = req.body;
-    const updateBooking = {
-        RouteNumber,
-        TripFrom,
-        TripTo,
-        DateFrom,
-        DateTo,
-        Price
+    const {CustomerName,CustomerID,Mobile,Email,PickUp,Destination,Date,Time,
+        BusService,SourceCity,DestinationCity,PassengerID,TicketNo,Status} = req.body;
+    
+        const updateBooking = {
+        CustomerName,
+        CustomerID,
+        Mobile,
+        Email,
+        PickUp,
+        Destination,
+        Date,
+        Time,
+        BusService,
+        SourceCity,
+        DestinationCity,
+        PassengerID,
+        TicketNo,
+        Status
     }
 
     await Booking.findByIdAndUpdate(bookingID, updateBooking).then((booking)=>{
