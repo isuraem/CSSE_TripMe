@@ -23,6 +23,10 @@ const ForeignTravellerSchema = new Schema({
         type : String,
         required : true 
     },
+    Password: {
+        type: String,
+        required: true
+    }
     // Nationality : {
     //     type : String,
     //     required : true 

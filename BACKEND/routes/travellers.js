@@ -13,13 +13,15 @@ router.route("/addLocalT").post(async(req,res)=>{
     const Phone = req.body.Phone;
     const Email = req.body.Email;
     const NIC = req.body.NIC;
+    const Password = req.body.Password;
 
     const newLocalTraveller = await new LocalTraveller({
         Name,
         Address,
         Phone,
         Email,
-        NIC
+        NIC,
+        Password
     })
 
     newLocalTraveller.save().then(()=>{
@@ -39,6 +41,7 @@ router.route("/addForeignT").post(async(req,res)=>{
     const Phone = req.body.Phone;
     const Email = req.body.Email;
     const PassportNo = req.body.PassportNo;
+    const Password = req.body.Password;
     // const Nationality = req.body.Nationality;
     // const DateFrom = req.body.DateFrom;
     // const DateTo = req.body.DateTo;
@@ -49,6 +52,7 @@ router.route("/addForeignT").post(async(req,res)=>{
         Phone,
         Email,
         PassportNo,
+        Password
         // Nationality,
         // DateFrom,
         // DateTo
@@ -66,7 +70,7 @@ router.route("/addTraveller/:type").post(async(req,res)=>{
     let travellerType = req.params.type;
     console.log("adding traveller", req, travellerType);
 
-    if(travellerType == "Local Traveller"){
+    if(travellerType == "LocalTraveller"){
         console.log("adding local traveller");
 
         const Name = req.body.Name;
@@ -74,13 +78,15 @@ router.route("/addTraveller/:type").post(async(req,res)=>{
         const Phone = req.body.Phone;
         const Email = req.body.Email;
         const NIC = req.body.NIC;
+        const Password = req.body.Password;
 
         const newTraveller = await new LocalTraveller({
             Name,
             Address,
             Phone,
             Email,
-            NIC
+            NIC,
+            Password
         })
 
         newTraveller.save().then(()=>{
@@ -89,7 +95,7 @@ router.route("/addTraveller/:type").post(async(req,res)=>{
             console.log(err);
         })
 
-    }else if(travellerType == "Foreign Traveller"){
+    }else if(travellerType == "ForeignTraveller"){
         console.log("adding foreign traveller");
 
         const Name = req.body.Name;
@@ -97,13 +103,15 @@ router.route("/addTraveller/:type").post(async(req,res)=>{
         const Phone = req.body.Phone;
         const Email = req.body.Email;
         const PassportNo = req.body.PassportNo;
+        const Password = req.body.Password;
 
         const newTraveller = await new ForeignTraveller({
             Name,
             // Address,
             Phone,
             Email,
-            PassportNo
+            PassportNo,
+            Password
         })
 
         newTraveller.save().then(()=>{
@@ -118,22 +126,22 @@ router.route("/addTraveller/:type").post(async(req,res)=>{
 })
 
 //get a traveller
-router.route("/getTraveller/:type/:id").get(async(req,res)=>{
-    let travellerID = req.params.id;
+router.route("/getTraveller/:type/:Email").get(async(req,res)=>{
+    let travellerEmail = req.params.Email;
     let travellerType = req.params.type;
 
-    console.log("get traveller...", travellerID, travellerType);
+    console.log("get traveller...", travellerEmail, travellerType);
 
-    if(travellerType == "Local Traveller"){
+    if(travellerType == "LocalTraveller"){
         console.log("grt local traveller...");
-        await LocalTraveller.findById(travellerID).then((traveller)=>{
+        await LocalTraveller.findOne({Email:travellerEmail}).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
         })
-    }else if(travellerType == "Foreign Traveller"){
+    }else if(travellerType == "ForeignTraveller"){
         console.log("get foreign traveller....");
-        await ForeignTraveller.findById(travellerID).then((traveller)=>{
+        await ForeignTraveller.findOne({Email:travellerEmail}).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -144,12 +152,27 @@ router.route("/getTraveller/:type/:id").get(async(req,res)=>{
 
 })
 
+
+//////
+// router.route("/getLT/:id").get(async(req,res)=>{
+//     let travellerID = req.body.id;
+
+//     console.log("get traveller...", travellerID);
+
+//     await LocalTraveller.findById(travellerID).then((traveller)=>{
+//         res.json(traveller)
+//     }).catch((err)=>{
+//         console.log(err)
+//     })
+// })
+
+////////
 //get all travellerts
-router.route("/getTravellers/:type").get(async(req,res)=>{
+router.route("/allTravellers/:type").get(async(req,res)=>{
     let travellerType = req.params.type;
     console.log("get travellers");
 
-    if(travellerType == "Local Traveller"){
+    if(travellerType == "LocalTraveller"){
         console.log("get local travellers");
 
         LocalTraveller.find().then((travellers)=>{
@@ -158,7 +181,7 @@ router.route("/getTravellers/:type").get(async(req,res)=>{
             console.log(err)
         })
 
-    }else if(travellerType == "Foreign Traveller"){
+    }else if(travellerType == "ForeignTraveller"){
         console.log("get foreign travellers");
 
         ForeignTraveller.find().then((travellers)=>{
@@ -178,14 +201,15 @@ router.route("/updateTraveller/:type/:id").put(async(req,res)=>{
 
     if(travellerType == "LocalTraveller"){
         console.log("update local traveller");
-        const{Name,Address,Phone,Email,NIC} = req.body;
+        const{Name,Address,Phone,Email,NIC,Password} = req.body;
 
         const updateLocalTraveller = {
             Name,
             Address,
             Phone,
             Email,
-            NIC
+            NIC,
+            Password
         }
 
         await LocalTraveller.findByIdAndUpdate(travellerID,updateLocalTraveller).then((traveller)=>{
@@ -201,7 +225,8 @@ router.route("/updateTraveller/:type/:id").put(async(req,res)=>{
             Name,
             Phone,
             Email,
-            PassportNo
+            PassportNo,
+            Password
         }
 
         await ForeignTraveller.findByIdAndUpdate(travellerID,updateForeignTraveller).then((traveller)=>{
@@ -241,6 +266,30 @@ router.route("/deleteTraveller/:type/:id").delete(async(req,res)=>{
     }
 })
 
+//check availability of user in the database
+router.route("/getUser/:email/:PW/:type").get(async(req,res)=>{
 
+    let Email = req.params.email;
+    let password = req.params.PW;
+    let type = req.params.type;
+
+    console.log("get user...",Email,password,type);
+    
+    if(type == "LocalTraveller"){
+        const user = await LocalTraveller.findOne({Email: Email , Password: password}).then((user)=>{
+            res.status(200).send({status : "User Fetched", login:user})
+        }).catch(()=>{
+            console.log(err.message);
+            res.status(500).send({status: "error eith fetching user", error:err.message});
+        })
+    }else if(type == "ForeignTraveller"){
+        const user = await ForeignTraveller.findOne({Email: Email , Password: password}).then((user)=>{
+            res.status(200).send({status : "User Fetched", login:user})
+        }).catch(()=>{
+            console.log(err.message);
+            res.status(500).send({status: "error eith fetching user", error:err.message});
+        })
+    }
+})
 
 module.exports =router;
