@@ -26,6 +26,9 @@ const LocalTravellerSchema = new Schema({
     Password: {
         type: String,
         required : true
+    },
+    Amount: {
+        type: Number
     }
 })
 
