@@ -6,7 +6,7 @@ router.route("/addBooking").post(async(req,res)=>{
     console.log("add booking...");
 
     const CustomerName = req.body.CustomerName;
-    const CustomerID = req.body.CustomerID;
+    // const CustomerID = req.body.CustomerID;
     const Mobile = req.body.Mobile;
     const Email = req.body.Email;
     const PickUp = req.body.PickUp;
@@ -14,16 +14,16 @@ router.route("/addBooking").post(async(req,res)=>{
     const Date = req.body.Date;
     const Time = req.body.Time;
     const BusService = req.body.BusService;
-    const SourceCity = req.body.SourceCity;
-    const DestinationCity = req.body.DestinationCity;
-    const PassengerID = req.body.PassengerID;
-    const TicketNo = req.body.TicketNo;
+    // const SourceCity = req.body.SourceCity;
+    // const DestinationCity = req.body.DestinationCity;
+    // const PassengerID = req.body.PassengerID;
+    // const TicketNo = req.body.TicketNo;
     const Status = req.body.Status;
 
 
     const newBooking = await new Booking({
         CustomerName,
-        CustomerID,
+        // CustomerID,
         Mobile,
         Email,
         PickUp,
@@ -31,11 +31,11 @@ router.route("/addBooking").post(async(req,res)=>{
         Date,
         Time,
         BusService,
-        SourceCity,
-        DestinationCity,
-        PassengerID,
-        TicketNo,
-        Status
+        // SourceCity,
+        // DestinationCity,
+        // PassengerID,
+        // TicketNo,
+        Status,
     })
 
     newBooking.save().then(()=>{
@@ -65,7 +65,7 @@ router.route("/updatebooking/:id").put(async(req,res)=>{
     
         const updateBooking = {
         CustomerName,
-        CustomerID,
+        // CustomerID,
         Mobile,
         Email,
         PickUp,
@@ -73,10 +73,10 @@ router.route("/updatebooking/:id").put(async(req,res)=>{
         Date,
         Time,
         BusService,
-        SourceCity,
-        DestinationCity,
-        PassengerID,
-        TicketNo,
+        // SourceCity,
+        // DestinationCity,
+        // PassengerID,
+        // TicketNo,
         Status
     }
 

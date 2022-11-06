@@ -8,55 +8,55 @@ const BookingSchema = new Schema({
     },
     CustomerID: {
         type: String,
-        required: true
+        // required: true
     },
     Mobile: {
         type: String,
-        required: true
+        // required: true
     },
     Email: {
         type: String,
-        required: true
+        // required: true
     },
     PickUp: {
         type: String,
-        required: true
+        // required: true
     },
     Destination: {
         type: String,
-        required: true
+        // required: true
     },
     Date: {
         type: String,
-        required: true
+        // required: true
     },
     Time: {
         type: String,
-        required: true
+        // required: true
     },
     BusService: {
         type: String,
-        required: true
+        // required: true
     },
     SourceCity: {
         type: String,
-        required: true
+        // required: true
     },
     DestinationCity: {
         type: String,
-        required: true
+        // required: true
     },
     PassengerID: {
         type: String,
-        required: true
+        // required: true
     },
     TicketNo: {
         type: String,
-        required: true
+        // required: true
     },
     Status: {
         type: String,
-        required: true
+        // required: true
     }
     
 })

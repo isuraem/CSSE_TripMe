@@ -52,8 +52,8 @@ router.route("/allBusServices").get(async(req,res)=>{
 //update bus services
 router.route("/updateBusService/:id").put(async(req,res)=>{
     let busserviceID = req.params.id;
-
-    console.log("update bus service", req);
+ console.log("id eka",req.params.id);
+    console.log("update bus service", req.body);
 
     const{BusNumber,BusServiceName,BusType,RouteNumber,DepartureTime,JourneyTime,
             RestStops,AirCondition,WiFi,ChargingPlugs} = req.body;
