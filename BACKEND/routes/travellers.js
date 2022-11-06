@@ -193,26 +193,25 @@ router.route("/allTravellers/:type").get(async(req,res)=>{
 })
 
 //update traveller
-router.route("/updateTraveller/:type/:id").put(async(req,res)=>{
-    let travellerID = req.params.id;
+router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
+    let travellerEmaill = req.params.Email;
     let travellerType = req.params.type;
     
     console.log("update traveller", travellerType, req);
 
     if(travellerType == "LocalTraveller"){
         console.log("update local traveller");
-        const{Name,Address,Phone,Email,NIC,Password} = req.body;
+        const{Name,Address,Phone,Email,NIC} = req.body;
 
         const updateLocalTraveller = {
             Name,
             Address,
             Phone,
             Email,
-            NIC,
-            Password
+            NIC
         }
 
-        await LocalTraveller.findByIdAndUpdate(travellerID,updateLocalTraveller).then((traveller)=>{
+        await LocalTraveller.findOneAndUpdate(travellerEmaill,updateLocalTraveller).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -225,11 +224,10 @@ router.route("/updateTraveller/:type/:id").put(async(req,res)=>{
             Name,
             Phone,
             Email,
-            PassportNo,
-            Password
+            PassportNo
         }
 
-        await ForeignTraveller.findByIdAndUpdate(travellerID,updateForeignTraveller).then((traveller)=>{
+        await ForeignTraveller.findOneAndUpdate(travellerEmaill,updateForeignTraveller).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
