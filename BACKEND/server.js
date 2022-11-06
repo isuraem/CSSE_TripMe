@@ -41,6 +41,9 @@ app.use("/booking", BookingRouter);
 const LoginRouter = require("./routes/login");
 app.use("/login",LoginRouter);
 
+const PaymentRouter = require("./routes/payment");
+app.use("/payment",PaymentRouter);
+
 
 app.listen(PORT, ()=>{
     console.log(`server is up and running on PORT: ${PORT}`);

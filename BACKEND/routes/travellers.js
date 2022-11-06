@@ -153,20 +153,6 @@ router.route("/getTraveller/:type/:Email").get(async(req,res)=>{
 })
 
 
-//////
-// router.route("/getLT/:id").get(async(req,res)=>{
-//     let travellerID = req.body.id;
-
-//     console.log("get traveller...", travellerID);
-
-//     await LocalTraveller.findById(travellerID).then((traveller)=>{
-//         res.json(traveller)
-//     }).catch((err)=>{
-//         console.log(err)
-//     })
-// })
-
-////////
 //get all travellerts
 router.route("/allTravellers/:type").get(async(req,res)=>{
     let travellerType = req.params.type;
@@ -201,14 +187,15 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
 
     if(travellerType == "LocalTraveller"){
         console.log("update local traveller");
-        const{Name,Address,Phone,Email,NIC} = req.body;
+        const{Name,Address,Phone,Email,NIC,Password} = req.body;
 
         const updateLocalTraveller = {
             Name,
             Address,
             Phone,
             Email,
-            NIC
+            NIC,
+            Password
         }
 
         await LocalTraveller.findOneAndUpdate(travellerEmaill,updateLocalTraveller).then((traveller)=>{
@@ -218,13 +205,14 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
         })
     }else if(travellerType == "ForeignTraveller"){
         console.log("update foreign traveller");
-        const{Name,Phone,Email,PassportNo} = req.body;
+        const{Name,Phone,Email,PassportNo,Password} = req.body;
 
         const updateForeignTraveller = {
             Name,
             Phone,
             Email,
-            PassportNo
+            PassportNo,
+            Password
         }
 
         await ForeignTraveller.findOneAndUpdate(travellerEmaill,updateForeignTraveller).then((traveller)=>{
@@ -237,8 +225,8 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
 })
 
 //delete traveller
-router.route("/deleteTraveller/:type/:id").delete(async(req,res)=>{
-    let TravellerId = req.params.id;
+router.route("/deleteTraveller/:type/:Email").delete(async(req,res)=>{
+    let TravellerEmail = req.params.Email;
     let travellerType = req.params.type;
 
     console.log("delete traveller");
@@ -246,7 +234,7 @@ router.route("/deleteTraveller/:type/:id").delete(async(req,res)=>{
 
         console.log("delete local  traveller");
 
-        await LocalTraveller.findByIdAndDelete(TravellerId).then((traveller)=>{
+        await LocalTraveller.findOneAndDelete(TravellerEmail).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -255,7 +243,7 @@ router.route("/deleteTraveller/:type/:id").delete(async(req,res)=>{
 
         console.log("delete foreign  traveller");
 
-        await ForeignTraveller.findByIdAndDelete(TravellerId).then((traveller)=>{
+        await ForeignTraveller.findOneAndDelete(TravellerEmail).then((traveller)=>{
             res.json(traveller)
             console.log("delete F");
         }).catch((err)=>{
