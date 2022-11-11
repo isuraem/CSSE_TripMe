@@ -41,10 +41,9 @@ router.route("/addBusService").post(async(req,res)=>{
 
 //get all bus services
 router.route("/allBusServices").get(async(req,res)=>{
-    console.log("get bus services");
-
     BusService.find().then((busService)=>{
         res.json(busService)
+        console.log("get bus services now");
     }).catch((err)=>{
         console.log(err)
     })

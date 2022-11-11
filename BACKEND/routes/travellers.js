@@ -208,7 +208,9 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
             Amount
         }
 
+
         await LocalTraveller.findOneAndUpdate({Email:Email},updateLocalTraveller).then((traveller)=>{
+
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -230,7 +232,9 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
             Amount
         }
 
+
         await ForeignTraveller.findOneAndUpdate({Email:Email},updateForeignTraveller).then((traveller)=>{
+
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -249,7 +253,7 @@ router.route("/deleteTraveller/:type/:Email").delete(async(req,res)=>{
 
         console.log("delete local  traveller");
 
-        await LocalTraveller.findOneAndDelete(TravellerEmail).then((traveller)=>{
+        await LocalTraveller.findOneAndDelete({Email:TravellerEmail}).then((traveller)=>{
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
@@ -258,7 +262,7 @@ router.route("/deleteTraveller/:type/:Email").delete(async(req,res)=>{
 
         console.log("delete foreign  traveller");
 
-        await ForeignTraveller.findOneAndDelete(TravellerEmail).then((traveller)=>{
+        await ForeignTraveller.findOneAndDelete({Email:TravellerEmail}).then((traveller)=>{
             res.json(traveller)
             console.log("delete F");
         }).catch((err)=>{
