@@ -15,7 +15,7 @@ router.route("/addBusService").post(async(req,res)=>{
     const AirCondition = req.body.AirCondition;
     const WiFi = req.body.WiFi;
     const ChargingPlugs = req.body.ChargingPlugs;
-    const Price = Number(req.body.Price);
+    const Price = req.body.Price ? Number(req.body.Price) : 0;
 
 
     const newBusService = await new BusService({
