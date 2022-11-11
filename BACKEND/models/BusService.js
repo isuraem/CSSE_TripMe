@@ -41,6 +41,10 @@ const BusServiceSchema = new Schema({
     ChargingPlugs: {
         type: String,
         required: true
+    },
+    Price : {
+        type : Number,
+        default : ''
     }
 
 })

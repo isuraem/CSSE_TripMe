@@ -1,40 +1,40 @@
 const router = require("express").Router();
 let Booking = require("../models/Booking");
+const { v4: uuidv4 } = require("uuid");
 
 //add booking
 router.route("/addBooking").post(async(req,res)=>{
     console.log("add booking...");
-
-    const CustomerName = req.body.CustomerName;
+    const TicketNo = uuidv4();
+    const CustomerName = req.body.CusName;
     // const CustomerID = req.body.CustomerID;
     const Mobile = req.body.Mobile;
     const Email = req.body.Email;
     const PickUp = req.body.PickUp;
     const Destination = req.body.Destination;
-    const Date = req.body.Date;
-    const Time = req.body.Time;
+    // const Date = req.body.Date;
+    // const Time = req.body.Time;
     const BusService = req.body.BusService;
     // const SourceCity = req.body.SourceCity;
     // const DestinationCity = req.body.DestinationCity;
     // const PassengerID = req.body.PassengerID;
     // const TicketNo = req.body.TicketNo;
     const Status = req.body.Status;
+    const TripPrice = Number(req.body.TPrice);
 
 
     const newBooking = await new Booking({
         CustomerName,
-        // CustomerID,
         Mobile,
         Email,
         PickUp,
         Destination,
-        Date,
-        Time,
         BusService,
         // SourceCity,
         // DestinationCity,
         // PassengerID,
-        // TicketNo,
+        TicketNo,
+        TripPrice,
         Status,
     })
 
