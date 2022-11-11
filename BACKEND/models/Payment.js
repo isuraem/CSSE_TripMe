@@ -5,7 +5,7 @@ const PaymentSchema = new Schema({
     CardNo : {
         type : Number,
         required : true,
-        unique : true
+
     },
     CustomerName : {
         type : String,
