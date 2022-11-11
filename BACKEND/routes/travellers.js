@@ -14,6 +14,7 @@ router.route("/addLocalT").post(async(req,res)=>{
     const Email = req.body.Email;
     const NIC = req.body.NIC;
     const Password = req.body.Password;
+    const Amount = req.body.Amount;
 
     const newLocalTraveller = await new LocalTraveller({
         Name,
@@ -21,7 +22,8 @@ router.route("/addLocalT").post(async(req,res)=>{
         Phone,
         Email,
         NIC,
-        Password
+        Password,
+        Amount
     })
 
     newLocalTraveller.save().then(()=>{
@@ -43,6 +45,7 @@ router.route("/addForeignT").post(async(req,res)=>{
     const PassportNo = req.body.PassportNo;
     const Password = req.body.Password;
     const Amount = req.body.Amount;
+
     // const Nationality = req.body.Nationality;
     // const DateFrom = req.body.DateFrom;
     // const DateTo = req.body.DateTo;
@@ -193,7 +196,7 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
         const Amountt = Number(req.body.Amountt);
         const Amount1 = Number(req.body.Amount1);
 
-        const Amount = Amountt+Amount1;
+        let Amount = Amountt+Amount1;
 
         const updateLocalTraveller = {
             Name,
@@ -210,13 +213,13 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
         }).catch((err)=>{
             console.log(err)
         })
-    }else if(travellerType == "ForeignTraveller"){
+    }if(travellerType == "ForeignTraveller"){
         console.log("update foreign traveller");
         const{Name,Phone,Email,PassportNo,Password} = req.body;
         const Amountt = Number(req.body.Amountt);
         const Amount1 = Number(req.body.Amount1);
 
-        const Amount = Amountt+Amount1;
+        let Amount = Amountt+Amount1;
 
         const updateForeignTraveller = {
             Name,
