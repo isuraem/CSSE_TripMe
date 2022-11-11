@@ -23,18 +23,14 @@ const ForeignTravellerSchema = new Schema({
         type : String,
         required : true 
     },
-    // Nationality : {
-    //     type : String,
-    //     required : true 
-    // },
-    // DateFrom : {
-    //     type : String,
-    //     required : true
-    // },
-    // DateTo : {
-    //     type : String,
-    //     required : true
-    // }
+    Password: {
+        type: String,
+        required: true
+    },
+    Amount : {
+        type : Number,
+        default:''
+    }
 })
 
 const ForeignTraveller = mongoose.model("ForeignTraveller", ForeignTravellerSchema);

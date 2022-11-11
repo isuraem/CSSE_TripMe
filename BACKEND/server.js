@@ -24,8 +24,26 @@ connection.once("open",()=>{
     console.log("mongodb connection success !");
 })
 
+
+//connecting backend and frontend for travellers
 const TravellerRouter = require("./routes/travellers");
 app.use("/traveller", TravellerRouter);
+
+//connecting backend and frontend for busServices
+const BusServiceRouter = require("./routes/busServices");
+app.use("/busService", BusServiceRouter);
+
+//connecting backend and frontend for bookings
+const BookingRouter = require("./routes/bookings");
+app.use("/booking", BookingRouter);
+
+//connecting backend and frontend for login
+const LoginRouter = require("./routes/login");
+app.use("/login",LoginRouter);
+
+const PaymentRouter = require("./routes/payment");
+app.use("/payment",PaymentRouter);
+
 
 app.listen(PORT, ()=>{
     console.log(`server is up and running on PORT: ${PORT}`);
