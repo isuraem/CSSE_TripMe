@@ -14,6 +14,7 @@ router.route("/addLocalT").post(async(req,res)=>{
     const Email = req.body.Email;
     const NIC = req.body.NIC;
     const Password = req.body.Password;
+    const Amount = req.body.Amount;
 
     const newLocalTraveller = await new LocalTraveller({
         Name,
@@ -21,7 +22,8 @@ router.route("/addLocalT").post(async(req,res)=>{
         Phone,
         Email,
         NIC,
-        Password
+        Password,
+        Amount
     })
 
     newLocalTraveller.save().then(()=>{
@@ -42,6 +44,8 @@ router.route("/addForeignT").post(async(req,res)=>{
     const Email = req.body.Email;
     const PassportNo = req.body.PassportNo;
     const Password = req.body.Password;
+    const Amount = req.body.Amount;
+
     // const Nationality = req.body.Nationality;
     // const DateFrom = req.body.DateFrom;
     // const DateTo = req.body.DateTo;
@@ -52,7 +56,8 @@ router.route("/addForeignT").post(async(req,res)=>{
         Phone,
         Email,
         PassportNo,
-        Password
+        Password,
+        Amount
         // Nationality,
         // DateFrom,
         // DateTo
@@ -188,6 +193,10 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
     if(travellerType == "LocalTraveller"){
         console.log("update local traveller");
         const{Name,Address,Phone,Email,NIC,Password} = req.body;
+        const Amountt = Number(req.body.Amountt);
+        const Amount1 = Number(req.body.Amount1);
+
+        let Amount = Amountt+Amount1;
 
         const updateLocalTraveller = {
             Name,
@@ -195,27 +204,37 @@ router.route("/updateTraveller/:type/:Email").put(async(req,res)=>{
             Phone,
             Email,
             NIC,
-            Password
+            Password,
+            Amount
         }
 
-        await LocalTraveller.findOneAndUpdate({Email:travellerEmail},updateLocalTraveller).then((traveller)=>{
+
+        await LocalTraveller.findOneAndUpdate({Email:Email},updateLocalTraveller).then((traveller)=>{
+
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)
         })
-    }else if(travellerType == "ForeignTraveller"){
+    }if(travellerType == "ForeignTraveller"){
         console.log("update foreign traveller");
         const{Name,Phone,Email,PassportNo,Password} = req.body;
+        const Amountt = Number(req.body.Amountt);
+        const Amount1 = Number(req.body.Amount1);
+
+        let Amount = Amountt+Amount1;
 
         const updateForeignTraveller = {
             Name,
             Phone,
             Email,
             PassportNo,
-            Password
+            Password,
+            Amount
         }
 
-        await ForeignTraveller.findOneAndUpdate({Email:travellerEmail},updateForeignTraveller).then((traveller)=>{
+
+        await ForeignTraveller.findOneAndUpdate({Email:Email},updateForeignTraveller).then((traveller)=>{
+
             res.json(traveller)
         }).catch((err)=>{
             console.log(err)

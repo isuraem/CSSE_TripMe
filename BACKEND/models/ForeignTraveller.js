@@ -28,7 +28,8 @@ const ForeignTravellerSchema = new Schema({
         required: true
     },
     Amount : {
-        type : Number
+        type : Number,
+        default:''
     }
 })
 

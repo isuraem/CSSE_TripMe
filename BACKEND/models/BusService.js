@@ -42,10 +42,12 @@ const BusServiceSchema = new Schema({
         type: String,
         required: true
     },
-    Price : {
-        type : Number,
-        default : ''
-    }
+
+    Price: {
+        type: Number,
+        default:''
+
+    },
 
 })
 const BusService = mongoose.model("BusService",BusServiceSchema);
