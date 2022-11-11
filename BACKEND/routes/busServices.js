@@ -15,6 +15,7 @@ router.route("/addBusService").post(async(req,res)=>{
     const AirCondition = req.body.AirCondition;
     const WiFi = req.body.WiFi;
     const ChargingPlugs = req.body.ChargingPlugs;
+    const Price = Number(req.body.Price);
 
 
     const newBusService = await new BusService({
@@ -27,7 +28,8 @@ router.route("/addBusService").post(async(req,res)=>{
         RestStops,
         AirCondition,
         WiFi,
-        ChargingPlugs
+        ChargingPlugs,
+        Price
     })
 
     newBusService.save().then(()=>{
@@ -56,7 +58,7 @@ router.route("/updateBusService/:id").put(async(req,res)=>{
     console.log("update bus service", req.body);
 
     const{BusNumber,BusServiceName,BusType,RouteNumber,DepartureTime,JourneyTime,
-            RestStops,AirCondition,WiFi,ChargingPlugs} = req.body;
+            RestStops,AirCondition,WiFi,ChargingPlugs,Price} = req.body;
     
     const updateBusService = {
         BusNumber,
@@ -68,7 +70,8 @@ router.route("/updateBusService/:id").put(async(req,res)=>{
         RestStops,
         AirCondition,
         WiFi,
-        ChargingPlugs
+        ChargingPlugs,
+        Price
     }
 
     await BusService.findByIdAndUpdate(busserviceID, updateBusService).then((busService)=>{
